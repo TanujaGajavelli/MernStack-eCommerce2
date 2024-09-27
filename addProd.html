@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body{
+        background-image:url('back.webp');
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      a{
+        text-decoration: none;
+        color: rgb(30, 100, 18);
+        font-size:30px;
+        padding: 0 25px;
+        margin-top: 3%;
+      } 
+     #a1{
+        margin-left: 45%;
+      }
+      .div1{
+        margin-left: 5%;
+        display: flex;
+      }
+      h1{
+        color: rgb(34, 61, 168);
+        font-size: 50px;
+        margin-left: 100px;
+      }
+      input{
+        margin-left:35%;
+        width:30%;
+        height:40px;
+        font-size:30px;
+        border-radius: 10px;
+        color: rgb(45, 105, 105);
+        margin-top: 10px;
+
+      }
+      #id{
+        margin-top: 7%;
+      }
+      button{
+        margin-top: 10px;
+        margin-left:35%;
+        width:30%;
+        height:35px;
+        font-size:30px;
+        border-radius: 10px;
+        color: rgb(45, 105, 105);
+      }
+      </style>
+  </head>
+  <body>
+    <div1 class="div1">
+      <h1>Add Product!!</h1>
+      <a href="homePage.html" id="a1">Home</a>
+      <a href="cart.html">Cart</a>
+      <a href="addProd.html">Add</a>
+    </div1>
+
+    <input type="text" name="" id="id" placeholder="id" /><br>
+    <input type="text" name="" id="title" placeholder="title" /><br>
+    <input type="text" name="" id="price" placeholder="price" /><br>
+    <input type="text" name="" id="description" placeholder="description" /><br>
+    <input type="text" name="" id="category" placeholder="category" /><br>
+    <input type="text" name="" id="image" placeholder="image" /><br>
+    <input type="text" name="" id="rate" placeholder="rate" /><br>
+    <input type="text" name="" id="count" placeholder="count" /><br>
+    <button onclick="addData()">Add</button>
+  </body>
+</html>
+
+<script>
+  let data = JSON.parse(localStorage.getItem("data")) || [];
+  console.log(data);
+
+  function addData() {
+    let id = document.getElementById("id");
+    let title = document.getElementById("title");
+    let price = document.getElementById("price");
+    let description = document.getElementById("description");
+    let category = document.getElementById("category");
+    let image = document.getElementById("image");
+    let rate = document.getElementById("rate");
+    let count = document.getElementById("count");
+
+    let obj = {
+      id: id.value,
+      title: title.value,
+      price: price.value,
+      description: description.value,
+      category: category.value,
+      image: image.value,
+      rating: {
+        rate: rate.value,
+        count: count.value,
+      },
+    };
+    if(id.value && title.value && price.value && description.value && image.value && rate.value && count.value){
+      data.push(obj);
+      localStorage.setItem("data", JSON.stringify(data));
+      id.value = "";
+      title.value = "";
+      price.value = "";
+      description.value = "";
+      category.value = "";
+      image.value = "";
+      rate.value = "";
+      count.value = "";
+      alert("Product added successfully!!");
+    }
+    else{
+      alert("Enter all details!!");
+    }
+  }
+</script>

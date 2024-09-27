@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+          background-image:url('back.webp');
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+        a{
+          text-decoration: none;
+          color: rgb(30, 100, 18);
+          font-size:30px;
+          padding: 0 25px;
+          margin-top: 3%;
+
+        }
+        #a1{
+          margin-left: 45%;
+        }
+        .div1{
+          margin-left: 5%;
+          display: flex;
+        }
+        h1{
+          color: rgb(34, 61, 168);
+          font-size: 50px;
+          margin-left: 100px;
+        }
+        .mainDiv{
+          margin:3% 5%;
+        }
+        .prodDiv{
+        padding: 10px;
+      }
+        </style>
+</head>
+<body>
+  <div class="div1">
+    <h1>Cart!!</h1>
+    <a href="homePage.html" id="a1">Home</a>
+    <a href="cart.html">Cart</a>
+    <a href="addProd.html">Add</a>
+  </div>
+    
+    
+</body>
+</html>
+<script>
+    let cartArray=JSON.parse(localStorage.getItem("cart")) || [];
+    let data = JSON.parse(localStorage.getItem("data")) ||[];
+    let body =document.querySelector("body");
+    let mainDiv = document.createElement("div");
+    mainDiv.style.display="flex";
+    mainDiv.style.flexWrap = "wrap";
+    mainDiv.innerHTML = "";
+    mainDiv.setAttribute("class","mainDiv");
+    function display(){
+      mainDiv.innerHTML = "";
+        for(let i=0; i<cartArray.length; i++){
+            let proDiv = document.createElement("div");
+            proDiv.style.width = "300px"
+            proDiv.style.border = "1px solid black";
+            proDiv.setAttribute("class","prodDiv");
+
+            let title = document.createElement("h2");
+            let price = document.createElement("p");
+            let desc = document.createElement("p");
+            let img = document.createElement("img");
+            let rate = document.createElement("p");
+
+            title.innerText = cartArray[i].title; 
+            price.innerText = cartArray[i].price;
+            desc.innerText = cartArray[i].description;
+            rate.innerText = cartArray[i].rating.rate;
+            img.src = cartArray[i].image;
+            img.style.width="100px";
+           
+            let delBtn = document.createElement("button");
+            delBtn.innerText = "Delete";
+            delBtn.addEventListener("click", function(){
+                delData(i);
+            });
+
+            proDiv.append(title,price,desc,img, rate, delBtn);
+            mainDiv.append(proDiv);
+          }
+           body.append(mainDiv);
+        }
+        display();
+
+        function delData(ind){
+            cartArray.splice(ind, 1);
+            localStorage.setItem("cart", JSON.stringify(cartArray));
+            display();
+        }
+</script>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+          background-image:url('back.webp');
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+        a{
+          text-decoration: none;
+          color: rgb(30, 100, 18);
+          font-size:30px;
+          padding: 0 25px;
+          margin-top: 3%;
+        }
+        #a1{
+          margin-left: 45%;
+        }
+        .div1{
+          margin-left: 5%;
+          display: flex;
+        }
+        h1{
+          color: rgb(34, 61, 168);
+          font-size: 50px;
+          margin-left: 100px;
+        }
+        input{
+        width:30%;
+        height:40px;
+        font-size:30px;
+        border-radius: 10px;
+        color: rgb(45, 105, 105);
+        margin-top: 10px;
+      }
+      #id{
+        margin-top: 7%;
+      }
+      button{
+        margin-left:35%;
+        width:30%;
+        height:35px;
+        font-size:25px;
+        border-radius: 10px;
+        color: rgb(45, 105, 105);
+        margin-top: 10px;
+      }
+      label{
+        margin-top: 7%;
+        width:15%;
+        font-size:30px;
+        color: rgb(45, 105, 105);
+        margin-left: 35%;
+      }
+      </style>
+</head>
+<body>
+  <div class="div1">
+    <h1>Update!!</h1>
+    <a href="homePage.html" id="a1">Home</a>
+    <a href="cart.html">Cart</a>
+    <a href="addProd.html">Add</a>
+  </div>
+  
+  <label for="id">Id:</label>
+  <input type="text" name="" id="id" placeholder="id" /><br>
+  <label for="title">Title:</label>
+  <input type="text" name="" id="title" placeholder="title" /><br>
+  <label for="price">Price:</label>
+  <input type="text" name="" id="price" placeholder="price" /><br>
+  <label for="description">Description:</label>
+  <input type="text" name="" id="description" placeholder="description" /><br>
+  <label for="category">Category:</label>
+  <input type="text" name="" id="category" placeholder="category" /><br>
+  <label for="image">Image:</label>
+  <input type="text" name="" id="image" placeholder="image" /><br>
+  <label for="rate">Rate:</label>
+  <input type="text" name="" id="rate" placeholder="rate" /><br>
+  <label for="count">Count:</label>
+  <input type="text" name="" id="count" placeholder="count" /><br>
+  <button onclick="update()">Update</button>
+</body>
+</html>
+<script>
+    let updInd = JSON.parse(localStorage.getItem("updInd"));
+    let data = JSON.parse(localStorage.getItem("data"));
+     document.getElementById("id").value = data[updInd].id;
+     document.getElementById("title").value = data[updInd].title;
+     document.getElementById("price").value = data[updInd].price;
+     document.getElementById("description").value = data[updInd].description;
+     document.getElementById("category").value = data[updInd].category;
+     document.getElementById("image").value = data[updInd].image;
+     document.getElementById("rate").value = data[updInd].rating.rate;
+     document.getElementById("count").value = data[updInd].rating.count;
+    function update(){
+        if(id.value && title.value && price.value && description.value && image.value && rate.value && count.value){
+          data[updInd].id=document.getElementById("id").value;
+          data[updInd].title=document.getElementById("title").value;
+          data[updInd].price= document.getElementById("price").value ;
+          data[updInd].description=document.getElementById("description").value ;
+          data[updInd].category=document.getElementById("category").value;
+          data[updInd].image= document.getElementById("image").value ;
+          data[updInd].rating.rate=document.getElementById("rate").value;
+          data[updInd].rating.count= document.getElementById("count").value;
+
+          localStorage.setItem("data", JSON.stringify(data));
+          alert("Product details updated!!");
+        }
+        else{
+          alert("Enter all details!!");
+        }
+    }
+</script>
